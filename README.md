@@ -12,12 +12,21 @@ The goal of this template is to provide a small, neutral starting point with a s
 
 The included example files are intentionally lightweight so they can act as reference points without adding unnecessary structure to a new project.
 
+## Customization Files
+
+This template keeps the default template guidance separate from project-specific customization.
+
+- `README.md` and `AGENTS.md` are the template-owned defaults.
+- `CUSTOM_README.md` is the intended place for user-specific project documentation.
+- `CUSTOM_AGENT_GUIDANCE.md` is the intended place for user-specific agent instructions.
+
 ## Agent Guidance
 
 This template is designed to work well with coding agents such as Codex, Claude, and GitHub Copilot.
 
 - `AGENTS.md` contains the template-owned default guidance for agents.
+- `CUSTOM_README.md` contains project-specific documentation for humans and agents.
 - `CUSTOM_AGENT_GUIDANCE.md` is the intended place for users to add project-specific agent instructions.
 - `CLAUDE.md` and `.github/copilot-instructions.md` provide compatibility entry points for tools that look for those filenames.
 
-When extending this template into a real project, keep custom agent instructions in `CUSTOM_AGENT_GUIDANCE.md` so the project-specific guidance stays separate from the template defaults.
+When extending this template into a real project, keep project-specific documentation in `CUSTOM_README.md` and project-specific agent instructions in `CUSTOM_AGENT_GUIDANCE.md` so those customizations stay separate from the template defaults.
