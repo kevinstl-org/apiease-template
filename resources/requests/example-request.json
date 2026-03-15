@@ -1,0 +1,6 @@
+{
+  "name": "example-request",
+  "description": "A generic example request placeholder for a new APIEase project.",
+  "method": "GET",
+  "url": "https://api.example.com/health"
+}
