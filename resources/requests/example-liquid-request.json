@@ -1,0 +1,6 @@
+{
+  "id": "inventory-message-template",
+  "name": "Inventory Message Template",
+  "type": "liquid",
+  "liquid": "{% assign product_title = product.title | default: 'Unknown product' %}\n{\n  \"message\": \"Inventory lookup prepared for {{ product_title }}\"\n}"
+}

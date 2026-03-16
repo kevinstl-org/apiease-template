@@ -10,7 +10,15 @@ The goal of this template is to provide a small, neutral starting point with a s
 - `resources/widgets`
 - `resources/variables`
 
-The included example files are intentionally lightweight so they can act as reference points without adding unnecessary structure to a new project.
+The included example files are intentionally lightweight, but they now use the strict public API field shapes so they can serve as valid starting points instead of loose placeholders.
+
+Current examples:
+
+- `resources/requests/example-request.json`: HTTP request example covering the common top-level fields, all HTTP parameter types, and all trigger types.
+- `resources/requests/example-liquid-request.json`: Liquid request example showing the `liquid` field.
+- `resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
+- `resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
+- `resources/variables/example-variable.json`: Variable example including the `sensitive` field.
 
 The template also includes a bundled APIEase knowledge base at `knowledge/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 

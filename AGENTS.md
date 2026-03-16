@@ -48,3 +48,7 @@ A good change in this repository:
 - leaves the directory layout and config consistent,
 - makes the next agent or human more likely to understand what to do,
 - and avoids introducing unnecessary project-specific assumptions.
+
+## Commit & Pull Request Guidelines
+- Write imperative commit subjects under about 72 characters (for example `Add upgrade conflict reporting`).
+- Every implementation handoff must include a proposed commit message ending with a period, even if the user did not ask for one. Put it in the final completion summary as a dedicated line starting with "Commit message:".

@@ -1,5 +1,5 @@
 {
-  "name": "example-variable",
-  "description": "A generic variable placeholder for a new APIEase project.",
-  "value": "replace-me"
+  "name": "support_api_key",
+  "value": "replace-with-real-secret",
+  "sensitive": true
 }
