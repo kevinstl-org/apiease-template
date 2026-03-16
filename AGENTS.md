@@ -9,9 +9,10 @@ Agents working in this repository should optimize for clarity, minimalism, and t
 Before making changes, read these files in this order:
 
 1. `AGENTS.md`
-2. `CUSTOM_AGENT_GUIDANCE.md`
-3. `CUSTOM_README.md`
-4. `README.md`
+2. `knowledge/apiEaseDocsConsolidated.md`
+3. `CUSTOM_AGENT_GUIDANCE.md`
+4. `CUSTOM_README.md`
+5. `README.md`
 
 `AGENTS.md` and `README.md` are the template-owned defaults. `CUSTOM_AGENT_GUIDANCE.md` and `CUSTOM_README.md` are the intended places for project-specific customization.
 
@@ -19,6 +20,7 @@ If the custom files contain project-specific instructions, treat them as the use
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
+- Use `knowledge/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, and triggers should be configured.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
@@ -28,10 +30,12 @@ If the custom files contain project-specific instructions, treat them as the use
 - `resources/requests` contains request resources.
 - `resources/widgets` contains widget resources.
 - `resources/variables` contains variable resources.
+- `knowledge/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base agents should use when implementing project-specific resources.
 
 ## Guardrails
 - Do not add unrelated frameworks, build tooling, or app scaffolding by default.
 - Do not assume a package manager, runtime entrypoint, or deployment target unless the user adds one.
+- Do not guess at APIEase behavior when the knowledge base answers it; consult `knowledge/apiEaseDocsConsolidated.md` first.
 - Keep sample resources lightweight and easy to replace.
 - Preserve compatibility between `apiease.config.js` and the directory structure.
 - Prefer project-specific documentation updates in `CUSTOM_README.md`.
