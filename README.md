@@ -22,11 +22,14 @@ Current examples:
 
 The template also includes a bundled APIEase knowledge base at `docs/knowledge/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 
+It also includes shared agent guidance at `docs/shared-ongoing-ai-guidance.md` for implementation lessons that apply across APIEase projects, such as stricter runtime constraints discovered during real-world Liquid request work.
+
 ## Customization Files
 
 This template keeps the default template guidance separate from project-specific customization.
 
 - `README.md` and `AGENTS.md` are the template-owned defaults.
+- `docs/shared-ongoing-ai-guidance.md` is template-owned shared implementation guidance for agents.
 - `docs/knowledge/apiEaseDocsConsolidated.md` is the template-owned APIEase product reference.
 - `CUSTOM_README.md` is the intended place for user-specific project documentation.
 - `CUSTOM_AGENT_GUIDANCE.md` is the intended place for user-specific agent instructions.
@@ -36,9 +39,10 @@ This template keeps the default template guidance separate from project-specific
 This template is designed to work well with coding agents such as Codex, Claude, and GitHub Copilot.
 
 - `AGENTS.md` contains the template-owned default guidance for agents.
+- `docs/shared-ongoing-ai-guidance.md` contains template-owned ongoing implementation guidance that applies across projects.
 - `docs/knowledge/apiEaseDocsConsolidated.md` contains the APIEase product knowledge agents should use when configuring resources.
 - `CUSTOM_README.md` contains project-specific documentation for humans and agents.
 - `CUSTOM_AGENT_GUIDANCE.md` is the intended place for users to add project-specific agent instructions.
 - `CLAUDE.md` and `.github/copilot-instructions.md` provide compatibility entry points for tools that look for those filenames.
 
-When extending this template into a real project, keep project-specific documentation in `CUSTOM_README.md` and project-specific agent instructions in `CUSTOM_AGENT_GUIDANCE.md` so those customizations stay separate from the template defaults.
+When extending this template into a real project, keep project-specific documentation in `CUSTOM_README.md` and project-specific agent instructions in `CUSTOM_AGENT_GUIDANCE.md` so those customizations stay separate from the template defaults and shared guidance.

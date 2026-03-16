@@ -1,6 +1,12 @@
-# APIEase Liquid Runtime Directives
+# Shared Ongoing AI Guidance
 
-Use this file when generating or reviewing Liquid for APIEase.
+Use this file for shared implementation lessons that should apply across APIEase projects.
+
+Add concise, reusable guidance here when real-world implementation work reveals behavior that agents should not re-learn project by project.
+
+## APIEase Liquid Runtime Constraints
+
+Use these directives when generating or reviewing Liquid for APIEase.
 
 These directives come from real runtime failures observed during client validation. Treat them as stricter-than-standard Liquid constraints for APIEase.
 
