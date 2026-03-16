@@ -1,21 +1,20 @@
 # Custom Agent Guidance
 
-Use this file for project-specific instructions you want coding agents to follow.
+Project-specific guidance lives in [docs/apex-liquid-runtime-directives.md](/Users/kevin/IdeaProjects/apiease-template/docs/apex-liquid-runtime-directives.md).
 
-Replace the placeholders below with your own guidance. Keep the content concrete and action-oriented so agents can apply it without guessing.
+Agents working on Liquid requests should read that file before generating or modifying APIEase Liquid.
 
 ## Project Goals
-- Describe what you are building with APIEase.
-- Note what success looks like for this project.
+- Build APIEase resources for a real client implementation.
+- Preserve working runtime behavior in APIEase over generic Liquid assumptions.
 
 ## Preferred Patterns
-- Describe how requests, widgets, and variables should usually be organized.
-- Add naming conventions or folder conventions if you have them.
+- Treat [docs/apex-liquid-runtime-directives.md](/Users/kevin/IdeaProjects/apiease-template/docs/apex-liquid-runtime-directives.md) as required guidance for Liquid authoring.
+- Prefer defensive Liquid patterns that match observed APIEase runtime behavior.
 
 ## Constraints
-- List anything agents should avoid changing.
-- List required compatibility, environment, or product constraints.
+- Do not use Liquid filters directly inside `if` comparisons.
+- Do not dereference nested response properties until key presence has been confirmed.
 
 ## Workflow Notes
-- Note any preferred commands, review expectations, or definition-of-done details.
-- Add links or references to additional docs if needed.
+- Add new APIEase runtime lessons to [docs/apex-liquid-runtime-directives.md](/Users/kevin/IdeaProjects/apiease-template/docs/apex-liquid-runtime-directives.md) so Apex and other agents can reuse them.
