@@ -20,6 +20,38 @@ Current examples:
 - `docs/knowledge/examples/resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
 - `docs/knowledge/examples/resources/variables/example-variable.json`: Variable example including the `sensitive` field.
 
+## Managing Resources With apiease
+
+This template assumes you will manage APIEase resources through `apiease-cli`.
+
+Supported resource types:
+
+- `request`
+- `widget`
+- `variable`
+
+Common commands:
+
+```bash
+apiease create request --file docs/knowledge/examples/resources/requests/example-request.json
+apiease create widget --file docs/knowledge/examples/resources/widgets/example-widget.json
+apiease create variable --file docs/knowledge/examples/resources/variables/example-variable.json
+
+apiease read request --request-id <request-id>
+apiease read widget --widget-id <widget-id>
+apiease read variable --variable-name <variable-name>
+
+apiease update request --request-id <request-id> --file docs/knowledge/examples/resources/requests/example-request.json
+apiease update widget --widget-id <widget-id> --file docs/knowledge/examples/resources/widgets/example-widget.json
+apiease update variable --variable-name <variable-name> --file docs/knowledge/examples/resources/variables/example-variable.json
+
+apiease delete request --request-id <request-id>
+apiease delete widget --widget-id <widget-id>
+apiease delete variable --variable-name <variable-name>
+```
+
+Use those example files as a starting point, then replace them with project-specific resources as your APIEase project grows.
+
 The template also includes a bundled APIEase knowledge base at `docs/knowledge/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 
 It also includes shared agent guidance at `docs/shared-ongoing-ai-guidance.md` for implementation lessons that apply across APIEase projects, such as stricter runtime constraints discovered during real-world Liquid request work.
