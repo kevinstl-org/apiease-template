@@ -15,12 +15,12 @@ The included example files are intentionally lightweight, but they now use the s
 
 Current examples:
 
-- `docs/knowledge/examples/resources/requests/example-request.json`: HTTP request example covering the common top-level fields, all HTTP parameter types, and all trigger types.
-- `docs/knowledge/examples/resources/requests/example-liquid-request.json`: Liquid request example showing the `liquid` field.
-- `docs/knowledge/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
-- `docs/knowledge/examples/resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
-- `docs/knowledge/examples/resources/variables/example-variable.json`: Variable example including the `sensitive` field.
-- `docs/knowledge/examples/resources/functions/example-function.json`: Function example using the documented saved Function fields and reusable Liquid parameters.
+- `docs/examples/resources/requests/example-request.json`: HTTP request example covering the common top-level fields, all HTTP parameter types, and all trigger types.
+- `docs/examples/resources/requests/example-liquid-request.json`: Liquid request example showing the `liquid` field.
+- `docs/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
+- `docs/examples/resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
+- `docs/examples/resources/variables/example-variable.json`: Variable example including the `sensitive` field.
+- `docs/examples/resources/functions/example-function.json`: Function example using the documented saved Function fields and reusable Liquid parameters.
 
 ## Managing Resources With apiease
 
@@ -36,20 +36,20 @@ Supported resource types:
 Common commands:
 
 ```bash
-apiease create request --file docs/knowledge/examples/resources/requests/example-request.json
-apiease create widget --file docs/knowledge/examples/resources/widgets/example-widget.json
-apiease create variable --file docs/knowledge/examples/resources/variables/example-variable.json
-apiease create function --file docs/knowledge/examples/resources/functions/example-function.json
+apiease create request --file docs/examples/resources/requests/example-request.json
+apiease create widget --file docs/examples/resources/widgets/example-widget.json
+apiease create variable --file docs/examples/resources/variables/example-variable.json
+apiease create function --file docs/examples/resources/functions/example-function.json
 
 apiease read request --request-id <request-id>
 apiease read widget --widget-id <widget-id>
 apiease read variable --variable-name <variable-name>
 apiease read function --function-id <function-id>
 
-apiease update request --request-id <request-id> --file docs/knowledge/examples/resources/requests/example-request.json
-apiease update widget --widget-id <widget-id> --file docs/knowledge/examples/resources/widgets/example-widget.json
-apiease update variable --variable-name <variable-name> --file docs/knowledge/examples/resources/variables/example-variable.json
-apiease update function --function-id <function-id> --file docs/knowledge/examples/resources/functions/example-function.json
+apiease update request --request-id <request-id> --file docs/examples/resources/requests/example-request.json
+apiease update widget --widget-id <widget-id> --file docs/examples/resources/widgets/example-widget.json
+apiease update variable --variable-name <variable-name> --file docs/examples/resources/variables/example-variable.json
+apiease update function --function-id <function-id> --file docs/examples/resources/functions/example-function.json
 
 apiease delete request --request-id <request-id>
 apiease delete widget --widget-id <widget-id>

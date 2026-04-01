@@ -8,7 +8,6 @@ const projectRoot = path.resolve(__dirname, "..");
 const exampleFunctionPath = path.join(
   projectRoot,
   "docs",
-  "knowledge",
   "examples",
   "resources",
   "functions",
@@ -17,7 +16,7 @@ const exampleFunctionPath = path.join(
 
 assert.ok(
   fs.existsSync(exampleFunctionPath),
-  "Expected a bundled function example at docs/knowledge/examples/resources/functions/example-function.json.",
+  "Expected a bundled function example at docs/examples/resources/functions/example-function.json.",
 );
 
 const exampleFunction = JSON.parse(fs.readFileSync(exampleFunctionPath, "utf8"));

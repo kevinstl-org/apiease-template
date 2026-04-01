@@ -33,7 +33,7 @@ assert.match(
 
 assert.match(
   templateReadme,
-  /docs\/knowledge\/examples\/resources\/functions\/example-function\.json/,
+  /docs\/examples\/resources\/functions\/example-function\.json/,
   "Expected README.md to reference the bundled function example file.",
 );
 
@@ -44,9 +44,9 @@ assert.match(
 );
 
 [
-  "create function --file docs/knowledge/examples/resources/functions/example-function.json",
+  "create function --file docs/examples/resources/functions/example-function.json",
   "read function --function-id <function-id>",
-  "update function --function-id <function-id> --file docs/knowledge/examples/resources/functions/example-function.json",
+  "update function --function-id <function-id> --file docs/examples/resources/functions/example-function.json",
   "delete function --function-id <function-id>",
 ].forEach((commandExample) => {
   assert.match(
