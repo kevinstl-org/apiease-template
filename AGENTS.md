@@ -10,7 +10,7 @@ Before making changes, read these files in this order:
 
 1. `AGENTS.md`
 2. `docs/shared-ongoing-ai-guidance.md`
-3. `docs/knowledge/apiEaseDocsConsolidated.md`
+3. `docs/knowledgebase/apiEaseDocsConsolidated.md`
 4. `CUSTOM_AGENT_GUIDANCE.md`
 5. `CUSTOM_README.md`
 6. `README.md`
@@ -21,7 +21,7 @@ If the custom files contain project-specific instructions, treat them as the use
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
-- Use `docs/knowledge/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
+- Use `docs/knowledgebase/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
@@ -32,13 +32,13 @@ If the custom files contain project-specific instructions, treat them as the use
 - `resources/widgets` contains widget resources.
 - `resources/variables` contains variable resources.
 - `resources/functions` contains function resources.
-- `docs/knowledge/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base agents should use when implementing project-specific resources.
+- `docs/knowledgebase/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base agents should use when implementing project-specific resources.
 - `docs/shared-ongoing-ai-guidance.md` contains shared implementation lessons and agent guidance that apply across projects.
 
 ## Guardrails
 - Do not add unrelated frameworks, build tooling, or app scaffolding by default.
 - Do not assume a package manager, runtime entrypoint, or deployment target unless the user adds one.
-- Do not guess at APIEase behavior when the knowledge base answers it; consult `docs/knowledge/apiEaseDocsConsolidated.md` first.
+- Do not guess at APIEase behavior when the knowledge base answers it; consult `docs/knowledgebase/apiEaseDocsConsolidated.md` first.
 - Apply shared implementation constraints from `docs/shared-ongoing-ai-guidance.md` when they are relevant, especially for APIEase Liquid behavior not covered in the main knowledge base.
 - Keep sample resources lightweight and easy to replace.
 - Preserve compatibility between `apiease.config.js` and the directory structure.

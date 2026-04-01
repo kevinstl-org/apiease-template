@@ -44,22 +44,22 @@ apiease create function --file docs/knowledge/examples/resources/functions/examp
 apiease read request --request-id <request-id>
 apiease read widget --widget-id <widget-id>
 apiease read variable --variable-name <variable-name>
-apiease read function --function-name <function-name>
+apiease read function --function-id <function-id>
 
 apiease update request --request-id <request-id> --file docs/knowledge/examples/resources/requests/example-request.json
 apiease update widget --widget-id <widget-id> --file docs/knowledge/examples/resources/widgets/example-widget.json
 apiease update variable --variable-name <variable-name> --file docs/knowledge/examples/resources/variables/example-variable.json
-apiease update function --function-name <function-name> --file docs/knowledge/examples/resources/functions/example-function.json
+apiease update function --function-id <function-id> --file docs/knowledge/examples/resources/functions/example-function.json
 
 apiease delete request --request-id <request-id>
 apiease delete widget --widget-id <widget-id>
 apiease delete variable --variable-name <variable-name>
-apiease delete function --function-name <function-name>
+apiease delete function --function-id <function-id>
 ```
 
 Use those example files as a starting point, then replace them with project-specific resources as your APIEase project grows.
 
-The template also includes a bundled APIEase knowledge base at `docs/knowledge/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
+The template also includes a bundled APIEase knowledge base at `docs/knowledgebase/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 
 It also includes shared agent guidance at `docs/shared-ongoing-ai-guidance.md` for implementation lessons that apply across APIEase projects, such as stricter runtime constraints discovered during real-world Liquid request work.
 
@@ -69,7 +69,7 @@ This template keeps the default template guidance separate from project-specific
 
 - `README.md` and `AGENTS.md` are the template-owned defaults.
 - `docs/shared-ongoing-ai-guidance.md` is template-owned shared implementation guidance for agents.
-- `docs/knowledge/apiEaseDocsConsolidated.md` is the template-owned APIEase product reference.
+- `docs/knowledgebase/apiEaseDocsConsolidated.md` is the template-owned APIEase product reference.
 - `CUSTOM_README.md` is the intended place for user-specific project documentation.
 - `CUSTOM_AGENT_GUIDANCE.md` is the intended place for user-specific agent instructions.
 
@@ -79,7 +79,7 @@ This template is designed to work well with coding agents such as Codex, Claude,
 
 - `AGENTS.md` contains the template-owned default guidance for agents.
 - `docs/shared-ongoing-ai-guidance.md` contains template-owned ongoing implementation guidance that applies across projects.
-- `docs/knowledge/apiEaseDocsConsolidated.md` contains the APIEase product knowledge agents should use when configuring resources.
+- `docs/knowledgebase/apiEaseDocsConsolidated.md` contains the APIEase product knowledge agents should use when configuring resources.
 - `CUSTOM_README.md` contains project-specific documentation for humans and agents.
 - `CUSTOM_AGENT_GUIDANCE.md` is the intended place for users to add project-specific agent instructions.
 - `CLAUDE.md` and `.github/copilot-instructions.md` provide compatibility entry points for tools that look for those filenames.

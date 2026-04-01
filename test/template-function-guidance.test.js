@@ -45,9 +45,9 @@ assert.match(
 
 [
   "create function --file docs/knowledge/examples/resources/functions/example-function.json",
-  "read function --function-name <function-name>",
-  "update function --function-name <function-name> --file docs/knowledge/examples/resources/functions/example-function.json",
-  "delete function --function-name <function-name>",
+  "read function --function-id <function-id>",
+  "update function --function-id <function-id> --file docs/knowledge/examples/resources/functions/example-function.json",
+  "delete function --function-id <function-id>",
 ].forEach((commandExample) => {
   assert.match(
     templateReadme,
