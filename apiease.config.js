@@ -5,6 +5,7 @@ const starterConfig = {
     requestsDirectory: "requests",
     widgetsDirectory: "widgets",
     variablesDirectory: "variables",
+    functionsDirectory: "functions",
   },
 };
 
