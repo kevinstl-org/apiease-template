@@ -8,7 +8,6 @@ const projectRoot = path.resolve(__dirname, "..");
 const exampleFunctionPath = path.join(
   projectRoot,
   "docs",
-  "knowledge",
   "examples",
   "resources",
   "functions",
@@ -17,7 +16,6 @@ const exampleFunctionPath = path.join(
 const exampleLiquidRequestPath = path.join(
   projectRoot,
   "docs",
-  "knowledge",
   "examples",
   "resources",
   "requests",
