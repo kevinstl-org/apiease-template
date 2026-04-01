@@ -21,7 +21,7 @@ If the custom files contain project-specific instructions, treat them as the use
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
-- Use `docs/knowledge/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, and triggers should be configured.
+- Use `docs/knowledge/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
@@ -31,6 +31,7 @@ If the custom files contain project-specific instructions, treat them as the use
 - `resources/requests` contains request resources.
 - `resources/widgets` contains widget resources.
 - `resources/variables` contains variable resources.
+- `resources/functions` contains function resources.
 - `docs/knowledge/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base agents should use when implementing project-specific resources.
 - `docs/shared-ongoing-ai-guidance.md` contains shared implementation lessons and agent guidance that apply across projects.
 

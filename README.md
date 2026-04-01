@@ -9,6 +9,7 @@ The goal of this template is to provide a small, neutral starting point with a s
 - `resources/requests`
 - `resources/widgets`
 - `resources/variables`
+- `resources/functions`
 
 The included example files are intentionally lightweight, but they now use the strict public API field shapes so they can serve as valid starting points instead of loose placeholders.
 
@@ -19,6 +20,7 @@ Current examples:
 - `docs/knowledge/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
 - `docs/knowledge/examples/resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
 - `docs/knowledge/examples/resources/variables/example-variable.json`: Variable example including the `sensitive` field.
+- `docs/knowledge/examples/resources/functions/example-function.json`: Function example using the documented saved Function fields and reusable Liquid parameters.
 
 ## Managing Resources With apiease
 
@@ -29,6 +31,7 @@ Supported resource types:
 - `request`
 - `widget`
 - `variable`
+- `function`
 
 Common commands:
 
@@ -36,18 +39,22 @@ Common commands:
 apiease create request --file docs/knowledge/examples/resources/requests/example-request.json
 apiease create widget --file docs/knowledge/examples/resources/widgets/example-widget.json
 apiease create variable --file docs/knowledge/examples/resources/variables/example-variable.json
+apiease create function --file docs/knowledge/examples/resources/functions/example-function.json
 
 apiease read request --request-id <request-id>
 apiease read widget --widget-id <widget-id>
 apiease read variable --variable-name <variable-name>
+apiease read function --function-name <function-name>
 
 apiease update request --request-id <request-id> --file docs/knowledge/examples/resources/requests/example-request.json
 apiease update widget --widget-id <widget-id> --file docs/knowledge/examples/resources/widgets/example-widget.json
 apiease update variable --variable-name <variable-name> --file docs/knowledge/examples/resources/variables/example-variable.json
+apiease update function --function-name <function-name> --file docs/knowledge/examples/resources/functions/example-function.json
 
 apiease delete request --request-id <request-id>
 apiease delete widget --widget-id <widget-id>
 apiease delete variable --variable-name <variable-name>
+apiease delete function --function-name <function-name>
 ```
 
 Use those example files as a starting point, then replace them with project-specific resources as your APIEase project grows.
