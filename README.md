@@ -1,8 +1,14 @@
 # APIEase Template
 
-This repository is the minimal starter template used by `apiease-cli` for new APIEase projects.
+This repository is the minimal starter template used by `apiease` for new APIEase projects.
 
 Most users should consume this template through the CLI with `apiease init` instead of cloning the repository directly.
+
+Install the CLI globally with:
+
+```bash
+npm install -g apiease
+```
 
 The goal of this template is to provide a small, neutral starting point with a simple configuration file and a `resources/` directory that mirrors the core APIEase resource model:
 
@@ -24,7 +30,7 @@ Current examples:
 
 ## Managing Resources With apiease
 
-This template assumes you will manage APIEase resources through `apiease-cli`.
+This template assumes you will manage APIEase resources through `apiease`.
 
 Supported resource types:
 
