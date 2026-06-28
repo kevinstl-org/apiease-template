@@ -47,21 +47,27 @@ apiease create widget --file docs/examples/resources/widgets/example-widget.json
 apiease create variable --file docs/examples/resources/variables/example-variable.json
 apiease create function --file docs/examples/resources/functions/example-function.json
 
-apiease read request --request-id <request-id>
+apiease read request --request-id <request-handle>
 apiease read widget --widget-id <widget-id>
 apiease read variable --variable-name <variable-name>
 apiease read function --function-id <function-id>
 
-apiease update request --request-id <request-id> --file docs/examples/resources/requests/example-request.json
+apiease update request --request-id <request-handle> --file docs/examples/resources/requests/example-request.json
 apiease update widget --widget-id <widget-id> --file docs/examples/resources/widgets/example-widget.json
 apiease update variable --variable-name <variable-name> --file docs/examples/resources/variables/example-variable.json
 apiease update function --function-id <function-id> --file docs/examples/resources/functions/example-function.json
 
-apiease delete request --request-id <request-id>
+apiease delete request --request-id <request-handle>
 apiease delete widget --widget-id <widget-id>
 apiease delete variable --variable-name <variable-name>
 apiease delete function --function-id <function-id>
 ```
+
+Request source files should use `handle` as the stable public identifier. `id` is server-owned and should not be stored in request source files. The existing `--request-id` option name is still accepted for read, update, and delete compatibility, but pass a request handle whenever possible.
+
+When a request source file has a valid `handle`, `apiease create request` is idempotent: it creates the request if the handle does not exist, or updates the existing request with that handle if it does.
+
+For older request files that still contain `id` or no `handle`, run `apiease create request --file <path> --auto-update-source-identifier` to migrate only the local identifier metadata.
 
 Use those example files as a starting point, then replace them with project-specific resources as your APIEase project grows.
 

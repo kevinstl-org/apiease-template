@@ -23,6 +23,7 @@ If the custom files contain project-specific instructions, treat them as the use
 - Help users create or modify APIEase resource files and configuration.
 - Use `docs/knowledgebase/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
+- Use request `handle` as the preferred public identifier for request resources. Do not store server-owned request `id` values in request source files.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
 
