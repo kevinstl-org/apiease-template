@@ -24,9 +24,9 @@ Current examples:
 - `docs/examples/resources/requests/example-request.json`: HTTP request example covering the common top-level fields, all HTTP parameter types, and all trigger types.
 - `docs/examples/resources/requests/example-liquid-request.json`: Liquid request example showing the `liquid` field.
 - `docs/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
-- `docs/examples/resources/widgets/example-widget.json`: Widget example using canonical public widget field names.
-- `docs/examples/resources/variables/example-variable.json`: Variable example including the `sensitive` field.
-- `docs/examples/resources/functions/example-function.json`: Function example using the documented saved Function fields and reusable Liquid parameters.
+- `docs/examples/resources/widgets/example-widget.json`: Widget example using the current public widget field names.
+- `docs/examples/resources/variables/example-variable.json`: Variable example including a stored value and the `sensitive` field.
+- `docs/examples/resources/functions/example-function.json`: Function example using saved Function fields and reusable Liquid parameters.
 
 ## Managing Resources With apiease
 
@@ -48,24 +48,28 @@ apiease create variable --file docs/examples/resources/variables/example-variabl
 apiease create function --file docs/examples/resources/functions/example-function.json
 
 apiease read request --request-id <request-handle>
-apiease read widget --widget-id <widget-id>
-apiease read variable --variable-name <variable-name>
-apiease read function --function-id <function-id>
+apiease read widget --widget-id <widget-handle>
+apiease read variable --variable-name <variable-handle>
+apiease read function --function-id <function-handle>
 
 apiease update request --request-id <request-handle> --file docs/examples/resources/requests/example-request.json
-apiease update widget --widget-id <widget-id> --file docs/examples/resources/widgets/example-widget.json
-apiease update variable --variable-name <variable-name> --file docs/examples/resources/variables/example-variable.json
-apiease update function --function-id <function-id> --file docs/examples/resources/functions/example-function.json
+apiease update widget --widget-id <widget-handle> --file docs/examples/resources/widgets/example-widget.json
+apiease update variable --variable-name <variable-handle> --file docs/examples/resources/variables/example-variable.json
+apiease update function --function-id <function-handle> --file docs/examples/resources/functions/example-function.json
 
 apiease delete request --request-id <request-handle>
-apiease delete widget --widget-id <widget-id>
-apiease delete variable --variable-name <variable-name>
-apiease delete function --function-id <function-id>
+apiease delete widget --widget-id <widget-handle>
+apiease delete variable --variable-name <variable-handle>
+apiease delete function --function-id <function-handle>
 ```
 
-Request source files should use `handle` as the stable public identifier. `id` is server-owned and should not be stored in request source files. The existing `--request-id` option name is still accepted for read, update, and delete compatibility, but pass a request handle whenever possible.
+Requests, widgets, variables, and functions should use `handle` as the stable public identifier. Use `name` only as display text. Server-owned `id` values are APIEase metadata and should not be stored in template resource source files or examples.
 
-When a request source file has a valid `handle`, `apiease create request` is idempotent: it creates the request if the handle does not exist, or updates the existing request with that handle if it does.
+Create commands read the resource handle from the JSON file. For widgets, the current public JSON field is `widgetHandle`; use that field as the widget handle until the public widget source shape exposes a plain `handle` field.
+
+The existing `--request-id`, `--widget-id`, `--variable-name`, and `--function-id` option names are compatibility names for read, update, and delete flows. Pass resource handles through those options unless the CLI exposes handle-named options for your installed version.
+
+When a request source file has a valid `handle`, `apiease create request` is idempotent: it creates the request if the handle does not exist, or updates the existing request with that handle if it does. The same handle-first identity model applies to widgets, variables, and functions.
 
 For older request files that still contain `id` or no `handle`, run `apiease create request --file <path> --auto-update-source-identifier` to migrate only the local identifier metadata.
 
