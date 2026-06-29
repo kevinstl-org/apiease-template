@@ -26,7 +26,6 @@ If the custom files contain project-specific instructions, treat them as the use
 - Treat requests, widgets, functions, and variables as first-class APIEase resources with a server-owned immutable `id`, a merchant-controlled `handle`, and a human-readable `name`.
 - Use `handle` as the preferred stable public identifier for requests, widgets, functions, and variables in source files, examples, CLI usage, Liquid references, System Request arguments, and documentation.
 - Do not store server-owned `id` values in template resource source files or examples. Use `name` only as display text, not as the preferred resource identifier.
-- Treat `appVariables` as internal APIEase runtime and configuration state only. User-managed variables belong to the first-class variables resource model and should be referenced by `handle`.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
 
