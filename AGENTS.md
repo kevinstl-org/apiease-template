@@ -17,11 +17,14 @@ Before making changes, read these files in this order:
 
 `AGENTS.md`, `README.md`, and `docs/shared-ongoing-ai-guidance.md` are template-owned defaults. `CUSTOM_AGENT_GUIDANCE.md` and `CUSTOM_README.md` are the intended places for project-specific customization.
 
+`docs/knowledgebase/apiEaseDocsConsolidated.md` is a generated, consolidated snapshot exported from `../apiease-docs/knowledgebase/apiEaseDocsConsolidated.md`. Use it for broad APIEase product context, but do not manually add template-specific guidance there because it will be overwritten by the next documentation import.
+
 If the custom files contain project-specific instructions, treat them as the user-editable guidance layer for this project. If they conflict with this file, follow the more specific instruction unless it would break the template's core structure.
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
 - Use `docs/knowledgebase/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
+- Keep reusable agent implementation lessons in `docs/shared-ongoing-ai-guidance.md`, not in the generated knowledge base snapshot.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
 - Treat requests, widgets, functions, and variables as first-class APIEase resources with a server-owned immutable `id`, a merchant-controlled `handle`, and a human-readable `name`.
 - Use `handle` as the preferred stable public identifier for requests, widgets, functions, and variables in source files, examples, CLI usage, Liquid references, System Request arguments, and documentation.
@@ -35,13 +38,14 @@ If the custom files contain project-specific instructions, treat them as the use
 - `resources/widgets` contains widget resources.
 - `resources/variables` contains variable resources.
 - `resources/functions` contains function resources.
-- `docs/knowledgebase/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base agents should use when implementing project-specific resources.
+- `docs/knowledgebase/apiEaseDocsConsolidated.md` contains the bundled APIEase knowledge base exported from `../apiease-docs`; treat it as generated product reference material.
 - `docs/shared-ongoing-ai-guidance.md` contains shared implementation lessons and agent guidance that apply across projects.
 
 ## Guardrails
 - Do not add unrelated frameworks, build tooling, or app scaffolding by default.
 - Do not assume a package manager, runtime entrypoint, or deployment target unless the user adds one.
 - Do not guess at APIEase behavior when the knowledge base answers it; consult `docs/knowledgebase/apiEaseDocsConsolidated.md` first.
+- Do not manually edit `docs/knowledgebase/apiEaseDocsConsolidated.md` for local guidance. Update the source docs in `../apiease-docs` and re-import for product documentation changes, or update `docs/shared-ongoing-ai-guidance.md` for reusable agent lessons.
 - Apply shared implementation constraints from `docs/shared-ongoing-ai-guidance.md` when they are relevant, especially for APIEase Liquid behavior not covered in the main knowledge base.
 - Keep sample resources lightweight and easy to replace.
 - Preserve compatibility between `apiease.config.js` and the directory structure.
