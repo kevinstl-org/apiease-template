@@ -95,4 +95,16 @@ assert.match(
   "Expected README.md to describe handle as the preferred identifier for every supported resource type.",
 );
 
+assert.match(
+  templateReadme,
+  /Function source files include `handle` as the target stable identifier\./,
+  "Expected README.md to describe Function source files as handle-first.",
+);
+
+assert.match(
+  templateReadme,
+  /Liquid Function tag supports `functionName` or `functionId`, but not a handle-named field yet\./,
+  "Expected README.md to document the current Liquid Function handle invocation deferral.",
+);
+
 console.log("template-function-guidance.test.js: passed");

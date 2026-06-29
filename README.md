@@ -26,7 +26,7 @@ Current examples:
 - `docs/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
 - `docs/examples/resources/widgets/example-widget.json`: Widget example using the current public widget field names.
 - `docs/examples/resources/variables/example-variable.json`: Variable example including a stored value and the `sensitive` field.
-- `docs/examples/resources/functions/example-function.json`: Function example using saved Function fields and reusable Liquid parameters.
+- `docs/examples/resources/functions/example-function.json`: Function example using a handle-first saved Function shape and reusable Liquid parameters.
 
 ## Managing Resources With apiease
 
@@ -66,6 +66,8 @@ apiease delete function --function-id <function-handle>
 Requests, widgets, variables, and functions should use `handle` as the stable public identifier. Use `name` only as display text. Server-owned `id` values are APIEase metadata and should not be stored in template resource source files or examples.
 
 Create commands read the resource handle from the JSON file. For widgets, the current public JSON field is `widgetHandle`; use that field as the widget handle until the public widget source shape exposes a plain `handle` field.
+
+Function source files include `handle` as the target stable identifier. The current Liquid Function tag supports `functionName` or `functionId`, but not a handle-named field yet. Until that Liquid invocation contract lands, Liquid examples use `functionName` as the compatibility fallback and avoid server-owned `functionId` values.
 
 The existing `--request-id`, `--widget-id`, `--variable-name`, and `--function-id` option names are compatibility names for read, update, and delete flows. Pass resource handles through those options unless the CLI exposes handle-named options for your installed version.
 
