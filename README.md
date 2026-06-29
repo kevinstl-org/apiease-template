@@ -24,7 +24,7 @@ Current examples:
 - `docs/examples/resources/requests/example-request.json`: HTTP request example covering the common top-level fields, all HTTP parameter types, and all trigger types.
 - `docs/examples/resources/requests/example-liquid-request.json`: Liquid request example showing the `liquid` field.
 - `docs/examples/resources/requests/example-system-request.json`: System request example showing the required `system` parameters.
-- `docs/examples/resources/widgets/example-widget.json`: Widget example using the current public widget field names.
+- `docs/examples/resources/widgets/example-widget.json`: Widget example using `widgetHandle` as the stable handle field and `widgetName` as display text.
 - `docs/examples/resources/variables/example-variable.json`: Variable example including a stored value and the `sensitive` field.
 - `docs/examples/resources/functions/example-function.json`: Function example using a handle-first saved Function shape and reusable Liquid parameters.
 
@@ -65,7 +65,7 @@ apiease delete function --function-id <function-handle>
 
 Requests, widgets, variables, and functions should use `handle` as the stable public identifier. Use `name` only as display text. Server-owned `id` values are APIEase metadata and should not be stored in template resource source files or examples.
 
-Create commands read the resource handle from the JSON file. For widgets, the current public JSON field is `widgetHandle`; use that field as the widget handle until the public widget source shape exposes a plain `handle` field.
+Create commands read the resource handle from the JSON file. Widget source files keep the current public `widgetHandle` and `widgetName` field names: `widgetHandle` is the widget handle, and `widgetName` is display text. Use `widgetHandle` as the widget handle until the public widget source shape exposes a plain `handle` field.
 
 Function source files include `handle` as the target stable identifier. The current Liquid Function tag supports `functionName` or `functionId`, but not a handle-named field yet. Until that Liquid invocation contract lands, Liquid examples use `functionName` as the compatibility fallback and avoid server-owned `functionId` values.
 
