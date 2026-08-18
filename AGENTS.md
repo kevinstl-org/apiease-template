@@ -23,12 +23,16 @@ If the custom files contain project-specific instructions, treat them as the use
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
+- For repository-scale project development, use the unified project workflow: start with `apiease init` or `apiease init --from-existing-resources`, refresh with `apiease pull`, edit canonical source, run `apiease validate`, and submit through personal `apiease apply`.
+- Use `apiease rename <resource-type> <old-handle> <new-handle>` for a bound resource rename. Express deletion only with the resource-family `delete/<handle>.json` workflow described in `README.md`; never infer deletion from an absent file.
 - Use `docs/knowledgebase/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
 - Keep reusable agent implementation lessons in `docs/shared-ongoing-ai-guidance.md`, not in the generated knowledge base snapshot.
 - Treat `apiease.config.js` as the source of truth for resource directory names.
 - Treat requests, widgets, functions, and variables as first-class APIEase resources with a server-owned immutable `id`, a merchant-controlled `handle`, and a human-readable `name`.
 - Use `handle` as the preferred stable public identifier for requests, widgets, functions, and variables in source files, examples, CLI usage, Liquid references, System Request arguments, and documentation.
 - Do not store server-owned `id` values in template resource source files or examples. Use `name` only as display text, not as the preferred resource identifier.
+- Keep canonical source free of `resourceVersion`, `liveRevision`, persistence versions, credentials, raw protected values, and other operational metadata. A protected field uses the canonical secret-free preserve placeholder; it is never a secret value. The CLI derives `preserve` or `defer` secure-input intent outside canonical source.
+- Let the CLI create and maintain `.apiease/project.json`, ignored checkout state, resource bindings, baselines, versions, deletion archives, and other generated operational state. Do not hand-author or copy those values into resource files.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
 
@@ -49,6 +53,8 @@ If the custom files contain project-specific instructions, treat them as the use
 - Apply shared implementation constraints from `docs/shared-ongoing-ai-guidance.md` when they are relevant, especially for APIEase Liquid behavior not covered in the main knowledge base.
 - Keep sample resources lightweight and easy to replace.
 - Preserve compatibility between `apiease.config.js` and the directory structure.
+- Treat `apiease validate` as non-executing validation. It does not mutate APIEase or prove external-provider runtime behavior.
+- Do not resolve baseline, version, idempotency, projection, or already-exists conflicts automatically. Preserve intended source and deletion intent, perform a verified pull, reconcile deliberately, then validate and apply again.
 - Prefer project-specific documentation updates in `CUSTOM_README.md`.
 - Update `README.md` only when the template-wide defaults or usage guidance change.
 

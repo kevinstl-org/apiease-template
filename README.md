@@ -30,7 +30,7 @@ Current examples:
 
 ## Managing Resources With apiease
 
-This template assumes you will manage APIEase resources through `apiease`.
+This template supports both direct resource CRUD and the complete `apiease` project workflow. Use direct commands for individual resources and the project workflow for repository-scale changes.
 
 Supported resource types:
 
@@ -39,7 +39,9 @@ Supported resource types:
 - `variable`
 - `function`
 
-Common commands:
+### Direct resource CRUD
+
+Common direct commands:
 
 ```bash
 apiease create request --file docs/examples/resources/requests/example-request.json
@@ -77,7 +79,79 @@ Lookup failures other than not found stop the command instead of falling back to
 
 For older request files that still contain `id` or no `handle`, run `apiease create request --file <path> --auto-update-source-identifier` to migrate only the local identifier metadata.
 
-Use those example files as a starting point, then replace them with project-specific resources as your APIEase project grows.
+### Complete project workflow
+
+Initialize a new project or a checkout from resources already stored in APIEase:
+
+```bash
+apiease init my-project
+apiease init my-project --from-existing-resources
+cd my-project
+```
+
+Initialization uses the fixed public `APIEase/apiease-template` checkout. The `--from-existing-resources` mode retrieves a synchronized project artifact through APIEase, verifies it, and overlays the canonical source. Run `apiease pull` later to retrieve another verified snapshot. A normal pull refuses to overwrite direct managed-file edits; use `apiease pull --force` only when you deliberately intend to discard those edits. Pull never merges local and server source automatically.
+
+Edit canonical source only in the four configured directories:
+
+- `resources/requests`
+- `resources/widgets`
+- `resources/variables`
+- `resources/functions`
+
+Each direct resource file is canonical version 1 JSON, its filename matches its lowercase handle, and `name` is display text. Do not put server-owned IDs, resource or live versions, persistence metadata, credentials, raw protected values, or generated checkout state in these files. The CLI owns `.apiease/project.json`, ignored resource bindings and baselines, apply receipts, and generated operational transitions; do not hand-author them.
+
+Validate the complete candidate before submission:
+
+```bash
+apiease validate
+```
+
+Validation is non-executing. It checks schema, canonical bytes, paths, bounds, digests, references, bindings, deletion intent, and secure-input authorization without mutating APIEase, executing resources, calling external providers, changing ignored local state, or archiving deletion files.
+
+### Renames and explicit deletions
+
+Rename a bound resource with the CLI so its immutable binding remains intact:
+
+```bash
+apiease rename request old-handle new-handle
+```
+
+The command supports `request`, `widget`, `variable`, and `function`. It updates the canonical filename, handle, and ignored binding locally. Manually renaming or removing a bound direct file is a local-integrity error, not a rename or deletion.
+
+Express deletion by moving the still-canonical bound file to its family delete directory:
+
+```text
+resources/functions/delete/<handle>.json
+resources/requests/delete/<handle>.json
+resources/variables/delete/<handle>.json
+resources/widgets/delete/<handle>.json
+```
+
+An absent file never implies deletion. The live direct file and its delete intent cannot coexist. Only after a committed or replayed receipt proves the deletion does the CLI move it to the matching `archive/<handle>.json` path. Validation, conflicts, and transport failures leave deletion intent unarchived.
+
+### Apply and conflicts
+
+Personal terminal use applies immediately and noninteractively:
+
+```bash
+apiease apply
+```
+
+The CLI builds one complete candidate, validates it, obtains an exact plan, and conditionally commits that same plan. A committed or replayed outcome updates ignored local state and archives only receipt-proven deletions. Git `main` is projected asynchronously from committed APIEase state.
+
+The CLI never resolves baseline, resource-version, already-exists, idempotency, or projection conflicts automatically. Preserve the intended source and deletion files, run a verified `apiease pull`, reconcile deliberately, then validate and apply again.
+
+### Deferred protected values
+
+Canonical source never contains raw protected values. A sensitive request parameter or variable uses the canonical secret-free value marker:
+
+```json
+{"mode":"preserve"}
+```
+
+The marker is source syntax, not a secret value. The CLI derives `preserve` outside canonical source for an existing bound target and `defer` for a new protected target. Deferred means explicitly unset; it is not an empty string and the placeholder is never stored as the secret. CLI results expose only safe resource-type, handle, and field-path selectors. Configure every deferred value later in the authenticated APIEase UI; runtime use fails safely before provider execution until it is configured, while canonical Git source remains secret-free.
+
+The lightweight files under `docs/examples/resources` remain reference examples for the four resource families. Copy their resource concepts into the canonical checkout shape produced by `init --from-existing-resources` or `pull` rather than treating examples as generated operational metadata.
 
 The template also includes a bundled snapshot of the public APIEase docs from `https://docs.apiease.com` at `docs/knowledgebase/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 

@@ -19,3 +19,4 @@ Replace the placeholders below with your own guidance. Keep the content concrete
 ## Workflow Notes
 - Note any preferred commands, review expectations, or definition-of-done details.
 - Add links or references to additional docs if needed.
+- Keep project-specific additions compatible with the public workflows in `AGENTS.md` and `docs/shared-ongoing-ai-guidance.md`; do not bypass validation, deliberate conflict handling, or protected-value rules.

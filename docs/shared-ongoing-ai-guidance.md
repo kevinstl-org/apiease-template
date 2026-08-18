@@ -17,6 +17,28 @@ Use these directives when creating or reviewing repository-managed APIEase resou
 - APIEase request invocation surfaces may still use the parameter name `requestId`. In Liquid `call` tags, storefront calls, remote calls, and Flow conditions, provide or compare the request handle as the `requestId` value whenever possible.
 - For chained request references, prefer the request handle when the APIEase surface supports it. Use names only as compatibility fallback display identifiers.
 
+## Unified Project Workflow
+
+Use this workflow when an agent manages a complete APIEase project. Direct resource CRUD remains appropriate when managing one resource at a time.
+
+1. Create a verified checkout of existing resources with `apiease init <project-name> --from-existing-resources`, or run `apiease pull` in an existing project checkout.
+2. Edit canonical, handle-first JSON under `resources/requests`, `resources/widgets`, `resources/variables`, and `resources/functions`.
+3. Rename a bound resource with `apiease rename <request|widget|variable|function> <old-handle> <new-handle>`. A manual file move is not a valid rename.
+4. Express a deletion by moving the still-canonical bound file to `resources/<family>/delete/<handle>.json`. Missing files do not mean delete. The CLI moves receipt-proven committed deletions to `resources/<family>/archive/<handle>.json`; validation, conflicts, and transport failures do not archive them.
+5. Run `apiease validate`. Validation checks the complete candidate without executing resources, calling providers, mutating live state, changing checkout state, or archiving deletion intent.
+6. Run personal `apiease apply`. It validates, plans, and immediately commits when every exact concurrency predicate still matches.
+
+Never resolve a baseline, resource-version, idempotency, already-exists, or projection conflict automatically. Preserve the intended canonical source and deletion files, run a verified `apiease pull`, reconcile the difference deliberately, then validate and apply again.
+
+## Canonical Source And Protected Values
+
+- Canonical source contains project intent only. Do not add server IDs, `resourceVersion`, `liveRevision`, persistence versions, timestamps, ciphertext, credentials, provider responses, or other generated operational state.
+- Do not hand-author `.apiease/project.json`, ignored checkout metadata, baselines, resource bindings, apply receipts, or deletion archive transitions. The CLI owns them.
+- Never write a raw protected value to canonical source, logs, output, delete/archive files, or checkout metadata.
+- A protected request parameter or sensitive variable uses exactly the canonical secret-free preserve placeholder, `{ "mode": "preserve" }`, in its value field. This marker is source syntax, not a secret and not proof that a value exists.
+- The CLI derives secure-input intent outside canonical files: `preserve` for an already bound protected target and `defer` for a new protected target. `defer` creates an explicit unset value; it is not an empty string and does not persist the placeholder as a secret.
+- Required deferred values are reported only by safe resource type, handle, and field path. Configure them later in the authenticated APIEase UI. Runtime use fails safely before provider execution until each required value is configured, while Git remains secret-free.
+
 ## APIEase Liquid Runtime Constraints
 
 Use these directives when generating or reviewing Liquid for APIEase.
