@@ -23,7 +23,9 @@ If the custom files contain project-specific instructions, treat them as the use
 
 ## What To Do
 - Help users create or modify APIEase resource files and configuration.
-- For repository-scale project development, use the unified project workflow: start with `apiease init` or `apiease init --from-existing-resources`, refresh with `apiease pull`, edit canonical source, run `apiease validate`, and submit through personal `apiease apply`.
+- For repository-scale Project Design, start with `apiease init` or `apiease init --from-existing-resources`, refresh from the stable Mongo snapshot with `apiease pull`, then run `apiease design-context`. Follow the returned versioned APIEase Project Design Protocol instructions, verified common-instruction digest, authenticated project context, and Codex execution envelope.
+- Treat files under the configured resource directories as deterministic encodings of Canonical Resource Source objects. Mongo is live authority; local files are the Codex Project Designer's editing surface, not a separate resource authority.
+- After editing, run `apiease validate`. Use `apiease apply` for an explicit personal immediate apply, or `apiease apply --require-approval` to submit the exact change set for deferred review as a Project Proposal.
 - Use `apiease rename <resource-type> <old-handle> <new-handle>` for a bound resource rename. Express deletion only with the resource-family `delete/<handle>.json` workflow described in `README.md`; never infer deletion from an absent file.
 - Use `docs/knowledgebase/apiEaseDocsConsolidated.md` as the primary product reference for how APIEase works and how requests, widgets, variables, functions, and triggers should be configured.
 - Keep reusable agent implementation lessons in `docs/shared-ongoing-ai-guidance.md`, not in the generated knowledge base snapshot.
@@ -33,6 +35,7 @@ If the custom files contain project-specific instructions, treat them as the use
 - Do not store server-owned `id` values in template resource source files or examples. Use `name` only as display text, not as the preferred resource identifier.
 - Keep canonical source free of `resourceVersion`, `liveRevision`, persistence versions, credentials, raw protected values, and other operational metadata. A protected field uses the canonical secret-free preserve placeholder; it is never a secret value. The CLI derives `preserve` or `defer` secure-input intent outside canonical source.
 - Let the CLI create and maintain `.apiease/project.json`, ignored checkout state, resource bindings, baselines, versions, deletion archives, and other generated operational state. Do not hand-author or copy those values into resource files.
+- Use Git diff only to present local edits to a human. It is not the project baseline, mutation authority, or deferred-review artifact.
 - Keep the repository minimal unless the user explicitly asks for more structure.
 - Prefer examples that teach the APIEase resource model over abstract scaffolding.
 

@@ -11,7 +11,7 @@
     {
       "type": "system",
       "name": "arguments",
-      "value": "[{\"handle\":\"support-email\",\"name\":\"Support Email\",\"value\":\"help@example.com\"},{\"handle\":\"support-api-key\",\"name\":\"Support API Key\",\"value\":\"replace-with-real-secret\",\"sensitive\":true}]"
+      "value": "[{\"handle\":\"support-email\",\"name\":\"Support Email\",\"value\":\"help@example.com\"},{\"handle\":\"support-api-key\",\"name\":\"Support API Key\",\"value\":{\"mode\":\"preserve\"},\"sensitive\":true}]"
     }
   ]
 }

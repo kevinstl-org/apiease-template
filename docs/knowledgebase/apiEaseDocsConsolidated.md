@@ -709,11 +709,13 @@ CONTENT
 
 This page is for coding agents such as Codex or Claude Code working in an `apiease-template` project repository.
 
-Most agent-driven APIEase work should follow this path:
+For complete-project work, use the Codex Project Designer workflow:
 
 - start from [Quickstart with apiease-template](./quickstart-with-apiease-template.md)
-- use [apiease-template](./apiease-template.md) as the repository structure
-- sync saved resources through [apiease-cli](./apiease-cli.md)
+- refresh the stable Mongo-authoritative snapshot with `apiease pull`
+- obtain the versioned APIEase Project Design Protocol and authenticated project context with `apiease design-context`
+- edit deterministic Canonical Resource Source files locally
+- validate and choose explicit immediate apply or deferred submission through [apiease-cli](./apiease-cli.md)
 - use the [APIEase Public API](./apiease-public-api.md) directly only when the CLI is not the right interface
 
 ## Start from the template
@@ -729,7 +731,7 @@ The template gives the agent:
 - a shared guidance file in `docs/shared-ongoing-ai-guidance.md`
 - project-owned customization files in `CUSTOM_README.md` and `CUSTOM_AGENT_GUIDANCE.md`
 
-That structure is what makes Codex-style work repeatable instead of prompt-only.
+That structure is the local editing environment. It does not own an independent project-design policy; the CLI returns the shared protocol used by every Project Designer.
 
 ## Read the local guidance first
 
@@ -749,9 +751,20 @@ This order matters:
 
 If `CUSTOM_AGENT_GUIDANCE.md` and `CUSTOM_README.md` are empty placeholders, the agent should leave them available for project-specific instructions instead of inventing hidden conventions elsewhere.
 
-## Treat the repository as the source of truth
+## Obtain the shared design protocol and context
 
-Inside a template-based project, the agent should treat local files as the canonical representation of saved APIEase resources.
+In an existing checkout, first run:
+
+```bash
+apiease pull
+apiease design-context
+```
+
+Pull returns a verified stable snapshot directly from Mongo, the live resource authority. It preserves local-edit protection and requires `--force` before deliberately discarding direct managed-file edits.
+
+`apiease design-context` returns the effective APIEase Project Design Protocol version, verified common-instruction digest and bytes, authenticated project design context, local baseline and edits, and the Codex execution envelope. Follow that returned material instead of deriving shared design semantics from template prose.
+
+## Treat canonical files as deterministic encodings
 
 Use `apiease.config.js` as the source of truth for resource directory names. In the current template, that means working primarily in:
 
@@ -760,7 +773,9 @@ Use `apiease.config.js` as the source of truth for resource directory names. In 
 - `resources/variables`
 - `resources/functions`
 
-Use `docs/examples/resources/*` as copyable examples, not as the long-term home for project resources.
+Files in those directories are deterministic encodings of Canonical Resource Source objects. They are the Codex Project Designer's local editing surface, not a separate authority domain. Mongo remains live authority.
+
+Use `docs/examples/resources/*` as copyable, secret-free examples, not as the long-term home for project resources.
 
 Resource files should use `handle` as the stable identifier across requests, widgets, variables, and functions. Do not copy server-owned `id` values into source files. For the full convention, see [Resource handles](./resource-handles.md).
 
@@ -791,32 +806,37 @@ This matters for agent work because:
 
 Do not commit real secrets, API keys, or environment files into the repository.
 
-## Use a repository-first agent loop
+## Use the complete-project design loop
 
-For most Codex-style tasks, the working loop should be:
+For complete-project Codex tasks, the working loop is:
 
 1. read the local guidance files
-2. inspect the current resource files and examples
-3. add or edit JSON definitions under `resources/*`
-4. sync those definitions with idempotent `apiease create` commands
-5. read the saved resource back when needed to confirm the change
-6. review and commit the repository changes
+2. run `apiease pull` to refresh the stable Mongo snapshot
+3. run `apiease design-context` and follow the returned protocol and context
+4. inspect and edit Canonical Resource Source encodings under `resources/*`
+5. express a rename with `apiease rename`, and a deletion only by moving the still-canonical bound file to `resources/<family>/delete/<handle>.json`; an absent file never means delete
+6. run `apiease validate`
+7. run `apiease apply` for explicit personal immediate apply, or `apiease apply --require-approval` for deferred review
 
-Example flow for a request:
-
-```bash
-cp docs/examples/resources/requests/example-request.json resources/requests/product-details-proxy.json
-apiease create request --file ./resources/requests/product-details-proxy.json
-apiease read request --request-handle product-details-proxy
-```
-
-After editing the same file again, rerun the same create command:
+Example flow:
 
 ```bash
-apiease create request --file ./resources/requests/product-details-proxy.json
+apiease pull
+apiease design-context
+# Edit resources/* according to the returned protocol and project requirements.
+apiease validate
+apiease apply
 ```
 
-When a resource file has a valid `handle`, `apiease create` creates the resource if it is missing and updates the existing resource if that handle already exists. Use the same create-or-update pattern for widgets, variables, and functions. Use the resource-specific handle flags documented in [apiease-cli](./apiease-cli.md) for read, explicit update, and delete commands.
+When approval is required before any live mutation, replace the final command with:
+
+```bash
+apiease apply --require-approval
+```
+
+Immediate and deferred modes use the same Canonical Resource Change Set, validation, and deterministic planning path. Immediate apply commits conditionally without a pending proposal. Deferred submission stores an immutable Project Change Artifact and creates a Project Proposal without mutating live resources before approval.
+
+Never write a raw protected value into a canonical file. Existing or deferred protected targets use the canonical secret-free `{ "mode": "preserve" }` placeholder; the CLI derives secure-input intent outside source. Configure required deferred values later through the authenticated APIEase UI.
 
 ## Prefer the CLI over direct HTTP
 
@@ -840,11 +860,9 @@ curl -X POST 'https://app-admin.apiease.com/api/remote/caller/call?requestId=pro
 
 The remote caller parameter is still named `requestId`; pass the request handle as its value for new work.
 
-## Keep source control in the loop
+## Use source control only for local collaboration
 
-The intended AI-agent workflow is not "make API calls and hope the platform state is remembered later." The repository should capture the durable definition of what the project wants APIEase to contain.
-
-In a template-based repository, agents should usually version:
+In a template-based repository, agents may version:
 
 - `apiease.config.js`
 - `.apiease/project.json`
@@ -852,29 +870,30 @@ In a template-based repository, agents should usually version:
 - project-specific notes in `CUSTOM_README.md`
 - project-specific agent instructions in `CUSTOM_AGENT_GUIDANCE.md`
 
-Use git review as part of the workflow:
+Use Git diff only as a human-readable presentation of local edits:
 
-- inspect diffs before syncing or committing
+- inspect diffs before validation, submission, or committing
 - keep commits focused on one resource or one related change set
 - use `apiease upgrade --check` and `apiease upgrade --dry-run` when updating the template baseline
 
-Keep project-specific decisions in the `CUSTOM_*` files so later template upgrades can refresh template-owned files without overwriting local operating guidance.
+Git diff is not live resource authority, the Mongo baseline, a mutation artifact, or approval evidence. Keep project-specific decisions in the `CUSTOM_*` files so later template upgrades can refresh template-owned files without overwriting local operating guidance.
 
 ## What good agent tasks look like
 
 AI agents work best when the task says:
 
-- which resource type should change
-- which file under `resources/*` should be created or updated
-- which existing docs or examples should be used as the contract reference
-- whether the agent should sync through the CLI or stop at a reviewed git diff
+- the customer objective and project-specific constraints
+- which existing requirements and resource families are in scope
+- whether the final change set should apply immediately or be submitted for deferred review
 
-That gives the agent a repository-first workflow with clear boundaries:
+The CLI-provided context gives the agent clear boundaries:
 
-- local files define the desired state
-- `apiease-cli` applies that state to APIEase
+- Mongo supplies the exact baseline and remains live authority
+- the APIEase Project Design Protocol supplies shared design semantics
+- local files encode proposed Canonical Resource Source objects
+- `apiease-cli` validates and submits one Canonical Resource Change Set
 - the public API stays available for lower-level integrations
-- git preserves the change history
+- Git diff remains local human presentation
 
 SOURCE
 https://docs.apiease.com/docs/developers/apiease-public-api

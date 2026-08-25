@@ -19,14 +19,17 @@ Use these directives when creating or reviewing repository-managed APIEase resou
 
 ## Unified Project Workflow
 
-Use this workflow when an agent manages a complete APIEase project. Direct resource CRUD remains appropriate when managing one resource at a time.
+Use this thin CLI workflow when the Codex Project Designer manages a complete APIEase project. The CLI supplies the authoritative shared design policy; do not recreate that policy in this repository.
 
-1. Create a verified checkout of existing resources with `apiease init <project-name> --from-existing-resources`, or run `apiease pull` in an existing project checkout.
-2. Edit canonical, handle-first JSON under `resources/requests`, `resources/widgets`, `resources/variables`, and `resources/functions`.
-3. Rename a bound resource with `apiease rename <request|widget|variable|function> <old-handle> <new-handle>`. A manual file move is not a valid rename.
-4. Express a deletion by moving the still-canonical bound file to `resources/<family>/delete/<handle>.json`. Missing files do not mean delete. The CLI moves receipt-proven committed deletions to `resources/<family>/archive/<handle>.json`; validation, conflicts, and transport failures do not archive them.
-5. Run `apiease validate`. Validation checks the complete candidate without executing resources, calling providers, mutating live state, changing checkout state, or archiving deletion intent.
-6. Run personal `apiease apply`. It validates, plans, and immediately commits when every exact concurrency predicate still matches.
+1. Create a checkout with `apiease init <project-name>` or `apiease init <project-name> --from-existing-resources`. In an existing checkout, run `apiease pull`. Existing-resource initialization and pull return a stable canonical snapshot from Mongo authority and preserve local-edit protection.
+2. Run `apiease design-context`. Follow the returned versioned APIEase Project Design Protocol common instructions, verified digest, authenticated design context, local baseline and edits, and Codex execution envelope.
+3. Edit the deterministic Canonical Resource Source encodings under `resources/requests`, `resources/widgets`, `resources/variables`, and `resources/functions`. These files are a local design surface; Mongo remains live resource authority.
+4. Rename a bound resource with `apiease rename <request|widget|variable|function> <old-handle> <new-handle>`. A manual file move is not a valid rename.
+5. Express deletion explicitly by moving the still-canonical bound file to `resources/<family>/delete/<handle>.json`. Missing files do not mean delete. The CLI moves receipt-proven committed deletions to `resources/<family>/archive/<handle>.json`; validation, conflicts, and transport failures do not archive them.
+6. Run `apiease validate`. Validation checks the complete change set without executing resources, calling providers, mutating live state, changing checkout state, or archiving deletion intent.
+7. Run `apiease apply` for explicit personal immediate apply, or `apiease apply --require-approval` to store the exact immutable Project Change Artifact and create a Project Proposal for deferred review. Both modes use the same canonical change-set validation and planning path.
+
+Use Git diff only as a local human-readable presentation of edits. It is not resource authority, a baseline, a submitted artifact, or approval evidence.
 
 Never resolve a baseline, resource-version, idempotency, already-exists, or projection conflict automatically. Preserve the intended canonical source and deletion files, run a verified `apiease pull`, reconcile the difference deliberately, then validate and apply again.
 

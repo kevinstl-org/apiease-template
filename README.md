@@ -89,7 +89,15 @@ apiease init my-project --from-existing-resources
 cd my-project
 ```
 
-Initialization uses the fixed public `APIEase/apiease-template` checkout. The `--from-existing-resources` mode retrieves a synchronized project artifact through APIEase, verifies it, and overlays the canonical source. Run `apiease pull` later to retrieve another verified snapshot. A normal pull refuses to overwrite direct managed-file edits; use `apiease pull --force` only when you deliberately intend to discard those edits. Pull never merges local and server source automatically.
+Initialization uses the fixed public `APIEase/apiease-template` checkout. The `--from-existing-resources` mode retrieves and verifies a stable canonical snapshot from Mongo, the live resource authority, then overlays its canonical files. Run `apiease pull` later to retrieve the latest stable Mongo snapshot. A normal pull refuses to overwrite direct managed-file edits; use `apiease pull --force` only when you deliberately intend to discard those edits. Pull never merges local and server source automatically.
+
+Before designing or editing a complete project, obtain the authenticated design context:
+
+```bash
+apiease design-context
+```
+
+This command provides the effective APIEase Project Design Protocol version and common-instruction digest, the common instructions, authenticated project context, local baseline and edits, and the Codex execution envelope. Follow that returned protocol instead of treating this template as an independently maintained design policy.
 
 Edit canonical source only in the four configured directories:
 
@@ -98,7 +106,7 @@ Edit canonical source only in the four configured directories:
 - `resources/variables`
 - `resources/functions`
 
-Each direct resource file is canonical version 1 JSON, its filename matches its lowercase handle, and `name` is display text. Do not put server-owned IDs, resource or live versions, persistence metadata, credentials, raw protected values, or generated checkout state in these files. The CLI owns `.apiease/project.json`, ignored resource bindings and baselines, apply receipts, and generated operational transitions; do not hand-author them.
+Each direct resource file is a deterministic encoding of a Canonical Resource Source object, its filename matches its lowercase handle, and `name` is display text. Files are the local design surface, not a separate authority domain; Mongo remains live resource authority. Do not put server-owned IDs, resource or live versions, persistence metadata, credentials, raw protected values, or generated checkout state in these files. The CLI owns `.apiease/project.json`, ignored resource bindings and baselines, apply receipts, and generated operational transitions; do not hand-author them.
 
 Validate the complete candidate before submission:
 
@@ -137,7 +145,15 @@ Personal terminal use applies immediately and noninteractively:
 apiease apply
 ```
 
-The CLI builds one complete candidate, validates it, obtains an exact plan, and conditionally commits that same plan. A committed or replayed outcome updates ignored local state and archives only receipt-proven deletions. Git `main` is projected asynchronously from committed APIEase state.
+The CLI builds one Canonical Resource Change Set, validates it, obtains an exact plan, and conditionally commits that same plan. Immediate apply does not create a pending proposal. A committed or replayed outcome updates ignored local state and archives only receipt-proven deletions.
+
+When review must happen before any live mutation, submit the same exact change set for deferred approval:
+
+```bash
+apiease apply --require-approval
+```
+
+Deferred submission stores an immutable Project Change Artifact and creates a Project Proposal. It does not mutate live resources before approval. Review and approved apply remain bound to that artifact and recheck the Mongo baseline.
 
 The CLI never resolves baseline, resource-version, already-exists, idempotency, or projection conflicts automatically. Preserve the intended source and deletion files, run a verified `apiease pull`, reconcile deliberately, then validate and apply again.
 
@@ -152,6 +168,8 @@ Canonical source never contains raw protected values. A sensitive request parame
 The marker is source syntax, not a secret value. The CLI derives `preserve` outside canonical source for an existing bound target and `defer` for a new protected target. Deferred means explicitly unset; it is not an empty string and the placeholder is never stored as the secret. CLI results expose only safe resource-type, handle, and field-path selectors. Configure every deferred value later in the authenticated APIEase UI; runtime use fails safely before provider execution until it is configured, while canonical Git source remains secret-free.
 
 The lightweight files under `docs/examples/resources` remain reference examples for the four resource families. Copy their resource concepts into the canonical checkout shape produced by `init --from-existing-resources` or `pull` rather than treating examples as generated operational metadata.
+
+Git diff may help a human review local edits, but it is only a presentation. It is not live resource authority, the Mongo baseline, a submitted Project Change Artifact, or approval evidence.
 
 The template also includes a bundled snapshot of the public APIEase docs from `https://docs.apiease.com` at `docs/knowledgebase/apiEaseDocsConsolidated.md` so coding agents can understand the platform and configure project resources correctly.
 

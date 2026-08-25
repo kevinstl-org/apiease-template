@@ -13,7 +13,7 @@
     {
       "type": "header",
       "name": "Authorization",
-      "value": "Bearer {external_api_token}",
+      "value": { "mode": "preserve" },
       "sensitive": true
     },
     {
