@@ -51,10 +51,10 @@ assert.notEqual(
   "Expected the variable name to be display text rather than the stable identifier.",
 );
 
-assert.equal(
-  typeof exampleVariable.value,
-  "string",
-  "Expected the variable example to include a stored value.",
+assert.deepEqual(
+  exampleVariable.value,
+  {mode: "preserve"},
+  "Expected the sensitive variable example to use the protected preserve placeholder.",
 );
 
 assert.equal(
